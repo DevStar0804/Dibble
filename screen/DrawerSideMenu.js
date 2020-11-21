@@ -36,8 +36,8 @@ export default class CustomDrawerSideMenu  extends React.Component  {
         this.state = ({
             userInfo:{
 
-            }
-        })
+            },
+        });
     }
 
     componentDidMount () {
@@ -47,7 +47,7 @@ export default class CustomDrawerSideMenu  extends React.Component  {
     loadUserInfo = async  () => {
         try {
             const value = await AsyncStorage.getItem(key_user_info)
-            if(value != null) {
+            if (value != null) {
                 // value previously stored
                 const jsonValue = JSON.parse(value);
                 console.log(jsonValue);
@@ -57,7 +57,7 @@ export default class CustomDrawerSideMenu  extends React.Component  {
             } else {
 
             }
-        } catch(e) {
+        } catch (e) {
             // error reading value
 
         }
@@ -80,22 +80,22 @@ export default class CustomDrawerSideMenu  extends React.Component  {
                         }}
                         style={{alignSelf:'flex-end'}}>
                         <Image
-                            source={langObj.isRTL ? require("../image/icon_arrow_blue_left.png"): require("../image/icon_arrow_blue_right.png")}
+                            source={langObj.isRTL ? require('../image/icon_arrow_blue_left.png'): require("../image/icon_arrow_blue_right.png")}
                             resizeMode="contain"
                             style={{
-                                width:screenWidth*0.05*(70/139),
-                                height:screenWidth*0.05
+                                width:screenWidth * 0.05 * (70 / 139),
+                                height:screenWidth * 0.05,
                             }}
                         />
                     </TouchableOpacity>
                     <Image
-                        source={require("../image/avatar_demo.png")}
+                        source={require('../image/avatar_demo.png')}
                         resizeMode="cover"
                         style={{
-                            width:screenWidth*0.3,
-                            height:screenWidth*0.3,
-                            borderRadius: screenWidth*0.15,
-                            alignSelf:'center'
+                            width: screenWidth * 0.3,
+                            height: screenWidth * 0.3,
+                            borderRadius: screenWidth * 0.15,
+                            alignSelf: 'center',
                         }}
                     />
                     <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
@@ -133,7 +133,7 @@ export default class CustomDrawerSideMenu  extends React.Component  {
                         <Text style={[globalStyle.textBasicStyle, mStyle.textMessage,{marginStart:5, marginEnd:5}]}>{langObj.likeItemListIntro}</Text>
                     </ScrollView>
                     <Text style={[globalStyle.textBasicBoldStyle, mStyle.textLabel,{marginTop:10, alignSelf:'flex-start'}]}>{langObj.setting}</Text>
-                    <TouchableOpacity style={{flexDirection:'row', alignItems:"center",paddingTop:10, paddingBottom:10}}>
+                    <TouchableOpacity style={[mStyle.selectItem]}>
                         <Text style={[globalStyle.textBasicBoldStyle, mStyle.textLabel]}>{langObj.orderHistory}</Text>
                         <View style={{flex:1}}/>
                         <Image
@@ -146,7 +146,7 @@ export default class CustomDrawerSideMenu  extends React.Component  {
                         />
                     </TouchableOpacity>
                     <View style={[mStyle.line]}/>
-                    <TouchableOpacity style={{flexDirection:'row', alignItems:"center",paddingTop:10, paddingBottom:10}}>
+                    <TouchableOpacity style={[mStyle.selectItem]}>
                         <Text style={[globalStyle.textBasicBoldStyle, mStyle.textLabel]}>{langObj.myAddress}</Text>
                         <View style={{flex:1}}/>
                         <Image
@@ -159,7 +159,7 @@ export default class CustomDrawerSideMenu  extends React.Component  {
                         />
                     </TouchableOpacity>
                     <View style={[mStyle.line]}/>
-                    <TouchableOpacity style={{flexDirection:'row', alignItems:"center",paddingTop:10, paddingBottom:10}}>
+                    <TouchableOpacity style={[mStyle.selectItem]}>
                         <Text style={[globalStyle.textBasicBoldStyle, mStyle.textLabel]}>{langObj.paymentOptions}</Text>
                         <View style={{flex:1}}/>
                         <Image
@@ -172,7 +172,7 @@ export default class CustomDrawerSideMenu  extends React.Component  {
                         />
                     </TouchableOpacity>
                     <View style={[mStyle.line]}/>
-                    <TouchableOpacity style={{flexDirection:'row', alignItems:"center",paddingTop:10, paddingBottom:10}}>
+                    <TouchableOpacity style={[mStyle.selectItem]}>
                         <Text style={[globalStyle.textBasicBoldStyle, mStyle.textLabel]}>{langObj.chatWithClientService}</Text>
                         <View style={{flex:1}}/>
                         <Image
@@ -185,7 +185,7 @@ export default class CustomDrawerSideMenu  extends React.Component  {
                         />
                     </TouchableOpacity>
                     <View style={[mStyle.line]}/>
-                    <TouchableOpacity style={{flexDirection:'row', alignItems:"center",paddingTop:10, paddingBottom:10}}>
+                    <TouchableOpacity style={[mStyle.selectItem]}>
                         <Text style={[globalStyle.textBasicBoldStyle, mStyle.textLabel]}>{langObj.moreSetting}</Text>
                         <View style={{flex:1}}/>
                         <Image
@@ -208,20 +208,26 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 const mStyle = StyleSheet.create({
     textGreeting : {
-        fontSize: 14,
-        color:c_text_green
+			fontSize: 14,
+			color:c_text_green
     },
     textLabel: {
-        fontSize: 14,
-        color:"#000000"
+			fontSize: 14,
+			color:"#000000"
     },
     textMessage: {
-        fontSize: 13,
-        color:c_dark_text
+			fontSize: 13,
+			color:c_dark_text
     },
     line:{
-        width: '100%',
-        height: 1,
-        backgroundColor:c_dark_line_opacity
+			width: '100%',
+			height: 1,
+			backgroundColor:c_dark_line_opacity
+    },
+    selectItem: {
+      flexDirection:'row', 
+			alignItems:"center",
+			paddingTop:10, 
+			paddingBottom:10        
     }
 })
