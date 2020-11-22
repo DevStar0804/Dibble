@@ -403,8 +403,25 @@ export default class HomeScreen extends React.Component {
 							alert (error);
 					})
 	}
+	reverse (text) {
+		var result = '';
+		for(var i=0; i<text.length; i++){
+			result += text[text.length-i-1];
+		}
+		return result;
+	}
 
 	render () {
+		let close_button;
+		if(this.state.searchText != ''){
+			close_button = <Image
+					source={require("../image/icon_close_black.png")}
+					resizeMode="contain"
+					style={{
+							width:screenWidth*0.05,
+							height:screenWidth*0.05*(153/150),marginEnd:5}}
+			/>;
+		}
 			return (
 					<View style={{flex:1, flexDirection:"column", alignItems:"center", backgroundColor:'#ffffff'}}>
 							<View style={{height: StatusBarHeight}}/>
@@ -445,9 +462,10 @@ export default class HomeScreen extends React.Component {
 							</View>
 							<View style={{flex:1, flexDirection: 'column'}}>
 									<View style={{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
-													borderColor: c_dark_line, borderRadius:10, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
+													borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
 											<TouchableOpacity
 													onPress={()=>{
+														if(this.state.searchText != '')
 															this.props.navigation.navigate(SearchResultScreenName, {
 																	searchText: this.state.searchText
 															})
@@ -460,17 +478,29 @@ export default class HomeScreen extends React.Component {
 																	height:screenWidth*0.05*(153/150),marginEnd:5}}
 													/>
 											</TouchableOpacity>
+											<TouchableOpacity
+													onPress={()=>{
+														if(this.state.searchText != '')
+															this.props.navigation.navigate(SearchResultScreenName, {
+																	searchText: this.state.searchText
+															})
+													}}>
+													{close_button}
+													
+											</TouchableOpacity>
 											<TextInput
 													placeholder={langObj.wantToBuy}
-													style={[globalStyle.textSearch,{flex:1, margin:0,padding:searchTextPadding}]}
+													textAlign='right'
+													style={[globalStyle.textSearch,{ flex:1, margin:0,padding:searchTextPadding}]}
 													value={this.state.searchText}
 													onSubmitEditing={()=>{
+														if(this.state.searchText != '')
 															this.props.navigation.navigate(SearchResultScreenName, {
 																	searchText: this.state.searchText
 															})
 													}}
 													onChangeText={(text)=>{
-															this.setState({searchText: text})
+														this.setState({searchText: this.reverse(text)})
 													}}
 											/>
 									</View>

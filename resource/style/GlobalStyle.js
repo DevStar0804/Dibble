@@ -28,6 +28,7 @@ export const globalStyle = StyleSheet.create({
   textSearch: {
     fontFamily: 'HelveticaNeue',
     fontSize: 14,
+    color: '#000',
     writingDirection: I18nManager.isRTL || isForceRTL ? 'rtl' : 'ltr',
   },
   textItemName: {
