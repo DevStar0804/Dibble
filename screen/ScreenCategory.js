@@ -178,6 +178,16 @@ export default class CategoryScreen extends React.Component {
 
 
 	render () {
+		let close_button;
+		if(this.state.searchText != ''){
+			close_button = <Image
+					source={require("../image/icon_close_black.png")}
+					resizeMode="contain"
+					style={{
+							width:screenWidth*0.03,
+							height:screenWidth*0.03}}
+			/>;
+		}
 		return (
 			<View style={{flex:1, flexDirection:"column", alignItems:"center", backgroundColor:'#ffffff'}}>
 				<View style={{height: StatusBarHeight}}/>
@@ -223,16 +233,17 @@ export default class CategoryScreen extends React.Component {
 							source={langObj.isRTL ? require("../image/icon_arrow_blue_left.png"): require("../image/icon_arrow_blue_right.png")}
 							resizeMode="contain"
 							style={{
-								width:screenWidth*0.045,
-								height:screenWidth*0.045,
+								width:screenWidth*0.06,
+								height:screenWidth*0.06,
 								marginStart:10
 							}}
 						/>
 					</TouchableOpacity>
+					
 				</View>
 				<View style={{flex:1, flexDirection: 'column'}}>
 					<View style={{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
-							borderColor: c_dark_line, borderRadius:10, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
+							borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
 						<Image
 							source={require("../image/icon_search.png")}
 							resizeMode="contain"
@@ -240,6 +251,12 @@ export default class CategoryScreen extends React.Component {
 								width:screenWidth*0.05,
 								height:screenWidth*0.05*(153/150),marginEnd:5}}
 						/>
+						<TouchableOpacity
+							onPress={()=>{
+								this.setState({searchText: ''});
+							}}>
+							{close_button}
+						</TouchableOpacity>
 						<TextInput
 							placeholder={langObj.wantToBuy}
 							textAlign='right'
@@ -251,7 +268,12 @@ export default class CategoryScreen extends React.Component {
 								})
 							}}
 							onChangeText={(text)=>{
-								this.setState({searchText: text})
+								this.setState({searchText: text.substr(-1)+this.state.searchText})
+							}}
+							onKeyPress={({ nativeEvent }) => {
+								if (nativeEvent.key === 'Backspace') {
+									this.setState({searchText: this.state.searchText.substr(2)})
+								}
 							}}
 						/>
 					</View>

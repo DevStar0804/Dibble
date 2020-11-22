@@ -195,6 +195,16 @@ export default class SearchResultScreen extends React.Component {
 	}
 
 	render () {
+		let close_button;
+		if(this.state.searchText != ''){
+			close_button = <Image
+					source={require("../image/icon_close_black.png")}
+					resizeMode="contain"
+					style={{
+							width:screenWidth*0.03,
+							height:screenWidth*0.03}}
+			/>;
+		}
 		return (
 			<View style={{flex:1, flexDirection:"column", backgroundColor:'#ffffff'}}>
 				<View style={{height: StatusBarHeight}}/>
@@ -213,7 +223,7 @@ export default class SearchResultScreen extends React.Component {
 						/>
 					</TouchableOpacity>
 					<View style={{flexDirection:'row', alignItems:'center', flex:1, margin:10,
-						backgroundColor:c_bg_search_box_dark, borderRadius:20, paddingStart:10, paddingEnd:10}}>
+						backgroundColor:'#fff', borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
 						<TouchableOpacity
 							onPress={()=>{
 								if(this.state.searchText != '')
@@ -223,14 +233,23 @@ export default class SearchResultScreen extends React.Component {
 								source={require("../image/icon_search.png")}
 								resizeMode="contain"
 								style={{
-									width:screenWidth*0.04,
-									height:screenWidth*0.04*(153/150),marginEnd:5}}
+									width:screenWidth*0.05,
+									height:screenWidth*0.05*(153/150),marginEnd:5}}
 							/>
 							
 						</TouchableOpacity>
+						<TouchableOpacity
+								onPress={()=>{
+									this.setState({searchText: ''});
+								}}>
+								{close_button}
+								
+						</TouchableOpacity>
 						<TextInput
-							style={[globalStyle.textSearch,{flex:1, margin:0,padding:searchTextPadding}]}
+							placeholder={langObj.wantToBuy}
+							style={[globalStyle.textSearch,{ flex:1, margin:0,padding:searchTextPadding}]}
 							value={this.state.searchText}
+							textAlign = 'right'
 							onSubmitEditing={()=>{
 								if(this.state.searchText != '')
 									this.startSearch(this.state.next_product_id);
@@ -246,7 +265,7 @@ export default class SearchResultScreen extends React.Component {
 						/>
 					</View>
 					<TouchableOpacity
-						style={{marginStart:20, marginEnd: 10, flexDirection: 'row', alignItems:'center'}}
+						style={{ flexDirection: 'row', alignItems:'center'}}
 						onPress={()=>{
 							this.props.navigation.goBack();
 						}}>
@@ -261,8 +280,8 @@ export default class SearchResultScreen extends React.Component {
 							source={langObj.isRTL ? require("../image/icon_arrow_blue_left.png"): require("../image/icon_arrow_blue_right.png")}
 							resizeMode="contain"
 							style={{
-								width:screenWidth*0.045,
-								height:screenWidth*0.045
+								width:screenWidth*0.06,
+								height:screenWidth*0.06
 							}}
 						/>
 					</TouchableOpacity>
