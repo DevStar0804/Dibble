@@ -181,13 +181,7 @@ export default class SearchResultScreen extends React.Component {
 		this.setState (allState);
 	}
 
-	reverse (text) {
-		var result = '';
-		for(var i=0; i<text.length; i++){
-			result += text[text.length-i-1];
-		}
-		return result;
-	}
+	
 	getListCategoriesNameString (categories) {
 		let categoryNameList = "";
 		for (let i = 0; i < categories.length; i++) {
@@ -242,7 +236,12 @@ export default class SearchResultScreen extends React.Component {
 									this.startSearch(this.state.next_product_id);
 							}}
 							onChangeText={(text)=>{
-								this.setState({searchText: this.reverse(text)})
+								this.setState({searchText: text.substr(-1)+this.state.searchText})
+							}}
+							onKeyPress={({ nativeEvent }) => {
+								if (nativeEvent.key === 'Backspace') {
+									this.setState({searchText: this.state.searchText.substr(2)})
+								}
 							}}
 						/>
 					</View>

@@ -173,94 +173,94 @@ export default class HomeScreen extends React.Component {
 
 
 	displaySlider () {
-			let sliderView = [];
-			for (let i = 0; i < this.state.categorySliders.length; i++) {
-					let sliderItem = this.state.categorySliders[i];
-					if (sliderItem.type == 'cat') {
-							sliderView.push(
-									<View style={{flexDirection:'column', marginTop:10, padding:10}}>
-											<View style={{flexDirection:'row', alignItems:'center'}}>
-													<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_dark_text}]}>{sliderItem.sliderName}</Text>
-													<View style={{flex:1}}></View>
-													<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_text_green}]}>{langObj.more}</Text>
+		let sliderView = [];
+		for (let i = 0; i < this.state.categorySliders.length; i++) {
+			let sliderItem = this.state.categorySliders[i];
+			if (sliderItem.type == 'cat') {
+				sliderView.push(
+					<View style={{flexDirection:'column', marginTop:10, padding:10}}>
+							<View style={{flexDirection:'row', alignItems:'center'}}>
+									<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_dark_text}]}>{sliderItem.sliderName}</Text>
+									<View style={{flex:1}}></View>
+									<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_text_green}]}>{langObj.more}</Text>
+							</View>
+							<FlatList
+									style={{ marginTop:10, width:screenWidth}}
+									data={this.state.categories}
+									showsHorizontalScrollIndicator={false}
+									horizontal={true}
+									renderItem={({item, index}) =>
+											<TouchableOpacity
+													onPress={()=>{
+															this.props.navigation.navigate(CategoryScreenName,{
+																	category_id: item.category_id,
+																	category_name: item.name
+															})
+													}}
+													style={mStyle.itemContainer}>
+													<Image
+															source={{uri:item.image}}
+															resizeMode="cover"
+															style={{
+																	width:screenWidth*0.3,
+																	height:screenWidth*0.33,
+																	borderTopLeftRadius:10,
+																	borderTopRightRadius:10}}
+													/>
+													<Text
+															numberOfLines={1}
+															style={[globalStyle.textItemName]}>{item.name}</Text>
+													<Text
+															numberOfLines={1}
+															style={[globalStyle.textItemDescription]}>{langObj.item + " " + item.num_of_products}</Text>
+											</TouchableOpacity>
+									}
+									keyExtractor={item => item.id}
+							/>
+					</View>
+				);
+			} else {
+				sliderView.push(
+					<View style={{flexDirection:'column', marginTop:10, padding:10}}>
+							<View style={{flexDirection:'row', alignItems:'center'}}>
+									<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_dark_text}]}>{sliderItem.sliderName}</Text>
+									<View style={{flex:1}}></View>
+									<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_text_green}]}>{langObj.more}</Text>
+							</View>
+							<FlatList
+									style={{ marginTop:10}}
+									data={sliderItem.itemList}
+									showsHorizontalScrollIndicator={false}
+									horizontal={true}
+									renderItem={({item, index}) =>
+											<View style={[mStyle.itemContainer,{width: screenWidth*0.4}]}>
+													<Image
+															source={item.image}
+															resizeMode="contain"
+															style={{
+																	width:screenWidth*0.4,
+																	height:screenWidth*0.3,
+																	borderTopLeftRadius:10,
+																	borderTopRightRadius:10}}
+													/>
+													<Text
+															numberOfLines={1}
+															style={[globalStyle.textItemName]}>{item.name}</Text>
+													<Text
+															numberOfLines={3}
+															style={[globalStyle.textItemDescription]}>{item.description}</Text>
+													<Text
+															numberOfLines={1}
+															style={[globalStyle.textItemDescription]}>{langObj.priceStartFrom + " " + item.price}</Text>
 											</View>
-											<FlatList
-													style={{ marginTop:10, width:screenWidth}}
-													data={this.state.categories}
-													showsHorizontalScrollIndicator={false}
-													horizontal={true}
-													renderItem={({item, index}) =>
-															<TouchableOpacity
-																	onPress={()=>{
-																			this.props.navigation.navigate(CategoryScreenName,{
-																					category_id: item.category_id,
-																					category_name: item.name
-																			})
-																	}}
-																	style={mStyle.itemContainer}>
-																	<Image
-																			source={{uri:item.image}}
-																			resizeMode="cover"
-																			style={{
-																					width:screenWidth*0.3,
-																					height:screenWidth*0.33,
-																					borderTopLeftRadius:10,
-																					borderTopRightRadius:10}}
-																	/>
-																	<Text
-																			numberOfLines={1}
-																			style={[globalStyle.textItemName]}>{item.name}</Text>
-																	<Text
-																			numberOfLines={1}
-																			style={[globalStyle.textItemDescription]}>{langObj.item + " " + item.num_of_products}</Text>
-															</TouchableOpacity>
-													}
-													keyExtractor={item => item.id}
-											/>
-									</View>
-							);
-					} else {
-							sliderView.push(
-									<View style={{flexDirection:'column', marginTop:10, padding:10}}>
-											<View style={{flexDirection:'row', alignItems:'center'}}>
-													<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_dark_text}]}>{sliderItem.sliderName}</Text>
-													<View style={{flex:1}}></View>
-													<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory,{color:c_text_green}]}>{langObj.more}</Text>
-											</View>
-											<FlatList
-													style={{ marginTop:10}}
-													data={sliderItem.itemList}
-													showsHorizontalScrollIndicator={false}
-													horizontal={true}
-													renderItem={({item, index}) =>
-															<View style={[mStyle.itemContainer,{width: screenWidth*0.4}]}>
-																	<Image
-																			source={item.image}
-																			resizeMode="contain"
-																			style={{
-																					width:screenWidth*0.4,
-																					height:screenWidth*0.3,
-																					borderTopLeftRadius:10,
-																					borderTopRightRadius:10}}
-																	/>
-																	<Text
-																			numberOfLines={1}
-																			style={[globalStyle.textItemName]}>{item.name}</Text>
-																	<Text
-																			numberOfLines={3}
-																			style={[globalStyle.textItemDescription]}>{item.description}</Text>
-																	<Text
-																			numberOfLines={1}
-																			style={[globalStyle.textItemDescription]}>{langObj.priceStartFrom + " " + item.price}</Text>
-															</View>
-													}
-													keyExtractor={item => item.id}
-											/>
-									</View>
-							);
-					}
+									}
+									keyExtractor={item => item.id}
+							/>
+					</View>
+				);
 			}
-			return sliderView;
+		}
+		return sliderView;
 	}
 
 
@@ -403,13 +403,6 @@ export default class HomeScreen extends React.Component {
 							alert (error);
 					})
 	}
-	reverse (text) {
-		var result = '';
-		for(var i=0; i<text.length; i++){
-			result += text[text.length-i-1];
-		}
-		return result;
-	}
 
 	render () {
 		let close_button;
@@ -418,8 +411,8 @@ export default class HomeScreen extends React.Component {
 					source={require("../image/icon_close_black.png")}
 					resizeMode="contain"
 					style={{
-							width:screenWidth*0.05,
-							height:screenWidth*0.05*(153/150),marginEnd:5}}
+							width:screenWidth*0.03,
+							height:screenWidth*0.03}}
 			/>;
 		}
 			return (
@@ -462,28 +455,25 @@ export default class HomeScreen extends React.Component {
 							</View>
 							<View style={{flex:1, flexDirection: 'column'}}>
 									<View style={{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
-													borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
+												borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
 											<TouchableOpacity
-													onPress={()=>{
-														if(this.state.searchText != '')
-															this.props.navigation.navigate(SearchResultScreenName, {
-																	searchText: this.state.searchText
-															})
-													}}>
-													<Image
-															source={require("../image/icon_search.png")}
-															resizeMode="contain"
-															style={{
-																	width:screenWidth*0.05,
-																	height:screenWidth*0.05*(153/150),marginEnd:5}}
-													/>
+												onPress={()=>{
+													if(this.state.searchText != '')
+														this.props.navigation.navigate(SearchResultScreenName, {
+															searchText: this.state.searchText
+														})
+												}}>
+												<Image
+													source={require("../image/icon_search.png")}
+													resizeMode="contain"
+													style={{
+														width:screenWidth*0.05,
+														height:screenWidth*0.05*(153/150),marginEnd:5}}
+												/>
 											</TouchableOpacity>
 											<TouchableOpacity
 													onPress={()=>{
-														if(this.state.searchText != '')
-															this.props.navigation.navigate(SearchResultScreenName, {
-																	searchText: this.state.searchText
-															})
+														this.setState({searchText: ''});
 													}}>
 													{close_button}
 													
@@ -496,49 +486,54 @@ export default class HomeScreen extends React.Component {
 													onSubmitEditing={()=>{
 														if(this.state.searchText != '')
 															this.props.navigation.navigate(SearchResultScreenName, {
-																	searchText: this.state.searchText
+																searchText: this.state.searchText
 															})
 													}}
 													onChangeText={(text)=>{
-														this.setState({searchText: this.reverse(text)})
+														this.setState({searchText: text.substr(-1)+this.state.searchText})
+													}}
+													onKeyPress={({ nativeEvent }) => {
+														if (nativeEvent.key === 'Backspace') {
+															this.setState({searchText: this.state.searchText.substr(2)})
+														}
 													}}
 											/>
 									</View>
 									<ScrollView>
-											<ImageSlider
-													loopBothSides={true}
-													loop={true}
-													autoPlayWithInterval={3000}
-													images={this.state.images}
-													customSlide={({ index, item, style, width }) => (
-															// It's important to put style here because it's got offset inside
+										<ImageSlider
+											loopBothSides={true}
+											loop={true}
+											autoPlayWithInterval={3000}
+											images={this.state.images}
+											customSlide={({ index, item, style, width }) => (
+												// It's important to put style here because it's got offset inside
+												<View
+													key={index}
+													style={[style,
+														{alignItems: 'center', backgroundColor: "#ffffff", height:screenHeight*0.25, paddingTop: 5 }]}>
+													<Image
+														source={item}
+														resizeMode="cover"
+														style={{borderRadius: 15, width: screenWidth-20, height:screenHeight*0.25-5}} />
+												</View>
+											)}
+											customButtons={(position, move) => (
+												<View style={{flexDirection: "row", width:screenWidth, justifyContent: 'center', position: 'absolute', bottom: 10}}>
+													{this.state.images.map((image, index) => {
+														return (
 															<View
-																	key={index}
-																	style={[style,
-																			{alignItems: 'center', backgroundColor: "#ffffff", height:screenHeight*0.25, paddingTop: 5 }]}>
-																	<Image
-																			source={item}
-																			resizeMode="cover"
-																			style={{borderRadius: 15, width: screenWidth-20, height:screenHeight*0.25-5}} />
+																key={index}
+																onPress={() => move(index)}
+																style={{
+																	width:10, height:10, margin:5, borderRadius: 10,
+																	backgroundColor: position==index? c_active_dot : c_inactive_dot}}>
 															</View>
-													)}
-													customButtons={(position, move) => (
-															<View style={{flexDirection: "row", width:screenWidth, justifyContent: 'center', position: 'absolute', bottom: 10}}>
-																	{this.state.images.map((image, index) => {
-																			return (
-																					<View
-																							key={index}
-																							onPress={() => move(index)}
-																							style={{
-																									width:10, height:10, margin:5, borderRadius: 10,
-																									backgroundColor: position==index? c_active_dot : c_inactive_dot}}>
-																					</View>
-																			);
-																	})}
-															</View>
-													)}
-											/>
-											{this.displaySlider()}
+														);
+													})}
+												</View>
+											)}
+										/>
+										{this.displaySlider()}
 									</ScrollView>
 							</View>
 							<View style={{width:this.state.indicatorSizeW, height:this.state.indicatorSizeH, backgroundColor: greyHasOpacity, flexDirection:"column",alignItems:"center", justifyContent:"center", position:"absolute"}}>
