@@ -27,6 +27,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SplashScreen from './screen/ScreenSpash';
 import HomeScreen from './screen/ScreenHome';
 import CategoryScreen from './screen/ScreenCategory';
@@ -41,6 +42,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import OrderSummaryScreen from './screen/ScreenOrderSummary';
 
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 console.disableYellowBox = true;
 
