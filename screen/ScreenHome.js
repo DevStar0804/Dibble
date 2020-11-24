@@ -167,7 +167,11 @@ export default class HomeScreen extends React.Component {
 						}
 					]
 				}
-			]
+			],
+			selection: {
+				start: 0,
+				end: 0
+			}
 		})
 	}
 
@@ -415,6 +419,7 @@ export default class HomeScreen extends React.Component {
 							height:screenWidth*0.03}}
 			/>;
 		}
+		const { selection } = this.state;
 			return (
 					<View style={{flex:1, flexDirection:"column", alignItems:"center", backgroundColor:'#ffffff'}}>
 							<View style={{height: StatusBarHeight}}/>
@@ -480,7 +485,7 @@ export default class HomeScreen extends React.Component {
 											</TouchableOpacity>
 											<TextInput
 													placeholder={langObj.wantToBuy}
-													textAlign='right'
+													textAlign= { isForceRTL? 'right':'left'}
 													style={[globalStyle.textSearch,{ flex:1, margin:0,padding:searchTextPadding}]}
 													value={this.state.searchText}
 													onSubmitEditing={()=>{
@@ -490,13 +495,14 @@ export default class HomeScreen extends React.Component {
 															})
 													}}
 													onChangeText={(text)=>{
-														this.setState({searchText: text.substr(-1)+this.state.searchText})
+														this.setState({searchText: text})
 													}}
 													onKeyPress={({ nativeEvent }) => {
-														if (nativeEvent.key === 'Backspace') {
-															this.setState({searchText: this.state.searchText.substr(2)})
+														if (isForceRTL && nativeEvent.key === 'Backspace') {
+															this.setState({searchText: this.state.searchText.substr(1)})
 														}
 													}}
+													selection={ isForceRTL? selection : null } 
 											/>
 									</View>
 									<ScrollView>

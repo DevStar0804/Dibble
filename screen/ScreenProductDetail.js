@@ -246,13 +246,16 @@ export default class ProductDetailScreen extends React.Component {
 			.then((responseJson) =>{
 				console.log(responseJson);
 				this._closeLoadingBox();
-				if (responseJson.rc == rc_success){
-					this.props.navigation.jumpTo(OrderSummaryScreenName, {
-						orderId :responseJson.order_id
-					});
-				} else {
-					alert (responseJson.message);
-				}
+				this.props.navigation.jumpTo(OrderSummaryScreenName, {
+					orderId : this.state.product_id
+				});
+				// if (responseJson.rc == rc_success){
+				// 	this.props.navigation.jumpTo(OrderSummaryScreenName, {
+				// 		orderId :responseJson.order_id
+				// 	});
+				// } else {
+				// 	alert (responseJson.message);
+				// }
 			})
 			.catch((error)=>{
 				this._closeLoadingBox();

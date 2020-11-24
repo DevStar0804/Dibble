@@ -47,7 +47,7 @@ export const c_text_header = '#000000';
 export const c_text_general = '#000000';
 export const c_green_lighter = '#c2faf1';
 
-export const isForceRTL = true;
+export const isForceRTL = false;
 // {
 //     "rc": 0,
 //     "message": "success",
