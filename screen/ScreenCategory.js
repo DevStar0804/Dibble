@@ -33,6 +33,7 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import getLanguage from '../resource/LanguageSupport';
 import {globalStyle} from '../resource/style/GlobalStyle';
+import SearchInput from './comp/SearchInput';
 
 export default class CategoryScreen extends React.Component {
 	constructor (props) {
@@ -242,7 +243,7 @@ export default class CategoryScreen extends React.Component {
 					
 				</View>
 				<View style={{flex:1, flexDirection: 'column'}}>
-					<View style={{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
+					{/* <View style={{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
 							borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
 						<Image
 							source={require("../image/icon_search.png")}
@@ -276,7 +277,13 @@ export default class CategoryScreen extends React.Component {
 								}
 							}}
 						/>
-					</View>
+					</View> */}
+					<SearchInput 
+						wantToBuy = {langObj.wantToBuy} 
+						navigation = {this.props.navigation} 
+						style = {{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
+							borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}
+					/>
 					<Text style={[globalStyle.textBasicBoldStyle, mStyle.textCategory]}>
 						{this.state.category_name}
 					</Text>
