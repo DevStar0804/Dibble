@@ -32,12 +32,12 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import ImageSlider from 'react-native-image-slider';
 import getLanguage from '../resource/LanguageSupport';
+import SearchInput from './comp/SearchInput';
 import {globalStyle} from '../resource/style/GlobalStyle';
 export default class HomeScreen extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = ({
-			searchText:"",
 			isRefresh: true,
 			indicatorSizeW: 0,
 			indicatorSizeH: 0,
@@ -168,10 +168,6 @@ export default class HomeScreen extends React.Component {
 					]
 				}
 			],
-			selection: {
-				start: 0,
-				end: 0
-			}
 		})
 	}
 
@@ -409,17 +405,6 @@ export default class HomeScreen extends React.Component {
 	}
 
 	render () {
-		let close_button;
-		if(this.state.searchText != ''){
-			close_button = <Image
-					source={require("../image/icon_close_black.png")}
-					resizeMode="contain"
-					style={{
-							width:screenWidth*0.03,
-							height:screenWidth*0.03}}
-			/>;
-		}
-		const { selection } = this.state;
 			return (
 					<View style={{flex:1, flexDirection:"column", alignItems:"center", backgroundColor:'#ffffff'}}>
 							<View style={{height: StatusBarHeight}}/>
@@ -459,51 +444,12 @@ export default class HomeScreen extends React.Component {
 									/>
 							</View>
 							<View style={{flex:1, flexDirection: 'column'}}>
-									<View style={{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
-												borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}>
-											<TouchableOpacity
-												onPress={()=>{
-													if(this.state.searchText != '')
-														this.props.navigation.navigate(SearchResultScreenName, {
-															searchText: this.state.searchText
-														})
-												}}>
-												<Image
-													source={require("../image/icon_search.png")}
-													resizeMode="contain"
-													style={{
-														width:screenWidth*0.05,
-														height:screenWidth*0.05*(153/150),marginEnd:5}}
-												/>
-											</TouchableOpacity>
-											<TouchableOpacity
-													onPress={()=>{
-														this.setState({searchText: ''});
-													}}>
-													{close_button}
-											</TouchableOpacity>
-											<TextInput
-													placeholder={langObj.wantToBuy}
-													textAlign= { isForceRTL? 'right':'left'}
-													style={[globalStyle.textSearch,{ flex:1, margin:0,padding:searchTextPadding}]}
-													value={this.state.searchText}
-													onSubmitEditing={()=>{
-														if(this.state.searchText != '')
-															this.props.navigation.navigate(SearchResultScreenName, {
-																searchText: this.state.searchText
-															})
-													}}
-													onChangeText={(text)=>{
-														this.setState({searchText: text})
-													}}
-													onKeyPress={({ nativeEvent }) => {
-														if (isForceRTL && nativeEvent.key === 'Backspace') {
-															this.setState({searchText: this.state.searchText.substr(1)})
-														}
-													}}
-													selection={ isForceRTL? selection : null } 
-											/>
-									</View>
+									<SearchInput 
+										wantToBuy = {langObj.wantToBuy} 
+										navigation = {this.props.navigation} 
+										style = {{flexDirection:'row', alignItems:'center', width: screenWidth-20, margin:10,
+          						borderColor: c_dark_line, borderRadius:20, borderWidth:0.5, paddingStart:10, paddingEnd:10}}
+									/>
 									<ScrollView>
 										<ImageSlider
 											loopBothSides={true}
