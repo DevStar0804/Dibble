@@ -31,7 +31,7 @@ import {
 import * as RNLocalize from "react-native-localize";
 import AsyncStorage from '@react-native-community/async-storage';
 import PhoneInput from 'react-native-phone-input';
-import RNFloatingInput from '../comp/FloatingInput';
+import RNFloatingInput from './comp/FloatingInput';
 import {searchTextPadding, StatusBarHeight} from '../resource/staus_bar_height';
 import getLanguage from '../resource/LanguageSupport';
 import {globalStyle} from '../resource/style/GlobalStyle';

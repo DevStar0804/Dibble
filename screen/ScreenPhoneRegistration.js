@@ -34,7 +34,7 @@ import {
 } from '../resource/BaseValue';
 import * as RNLocalize from "react-native-localize";
 import { Switch } from 'react-native-switch';
-import RNFloatingInput from '../comp/FloatingInput';
+import RNFloatingInput from './comp/FloatingInput';
 import AsyncStorage from '@react-native-community/async-storage';
 import { StatusBarHeight } from '../resource/staus_bar_height'
 import getLanguage from '../resource/LanguageSupport';

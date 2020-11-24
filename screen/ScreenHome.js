@@ -481,7 +481,6 @@ export default class HomeScreen extends React.Component {
 														this.setState({searchText: ''});
 													}}>
 													{close_button}
-													
 											</TouchableOpacity>
 											<TextInput
 													placeholder={langObj.wantToBuy}

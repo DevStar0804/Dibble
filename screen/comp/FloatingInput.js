@@ -8,7 +8,7 @@ import * as React from 'react';
 import {
     View, Text, TextInput, Dimensions, TouchableOpacity
 } from 'react-native';
-import {c_dark_line, c_text_green} from '../resource/BaseValue';
+import {c_dark_line, c_text_green} from '../../resource/BaseValue';
 
 export default class RNFloatingInput extends React.Component {
     constructor(props) {

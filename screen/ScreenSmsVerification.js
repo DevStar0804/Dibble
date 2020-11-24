@@ -137,29 +137,24 @@ export default class SmsVerificationScreen extends React.Component {
 				})
 				.then ((response) => response.json())
 				.then((responseJson) =>{
-					console.log('responseJson');
-					this.props.navigation.navigate(PhoneRegistrationScreenName, {
-						userPhone: this.state.userPhone,
-						userCountryCode: this.state.userCountryCode,
-						authKey : responseJson.auth_key
-					})
-					// if (responseJson.rc == rc_success){
-					// 	if (responseJson.is_registered) {
-					// 		this.loginWithPhone(responseJson.auth_key);
-					// 	} 
-					// 	else {
-					// 		this._closeLoadingBox();
-					// 		this.props.navigation.navigate(PhoneRegistrationScreenName, {
-					// 			userPhone: this.state.userPhone,
-					// 			userCountryCode: this.state.userCountryCode,
-					// 			authKey : responseJson.auth_key
-					// 		})
-					// 	}
-					// } 
-					// else {
-					// 	this._closeLoadingBox();
-					// 	alert (responseJson.message);
-					// }
+					console.log(responseJson);
+					if (responseJson.rc == rc_success){
+						if (responseJson.is_registered) {
+							this.loginWithPhone(responseJson.auth_key);
+						} 
+						else {
+							this._closeLoadingBox();
+							this.props.navigation.navigate(PhoneRegistrationScreenName, {
+								userPhone: this.state.userPhone,
+								userCountryCode: this.state.userCountryCode,
+								authKey : responseJson.auth_key
+							})
+						}
+					} 
+					else {
+						this._closeLoadingBox();
+						alert (responseJson.message);
+					}
 				})
 				.catch((error)=>{
 					this._closeLoadingBox();
