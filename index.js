@@ -41,7 +41,6 @@ import PhoneRegistrationScreen from './screen/ScreenPhoneRegistration';
 import SmsVerificationScreen from './screen/ScreenSmsVerification';
 import AsyncStorage from '@react-native-community/async-storage';
 import OrderSummaryScreen from './screen/ScreenOrderSummary';
-import SplashScreen from 'react-native-splash-screen';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
