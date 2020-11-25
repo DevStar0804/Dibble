@@ -2,8 +2,9 @@
  * @format
  */
 
-import {AppRegistry, I18nManager} from 'react-native';
+import { AppRegistry, I18nManager, View, Text } from 'react-native';
 import * as React from 'react';
+import {useEffect} from 'react';
 import {name as appName} from './app.json';
 import 'react-native-gesture-handler';
 import {
@@ -28,7 +29,8 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SplashScreen from './screen/ScreenSpash';
+import { createStackNavigator } from '@react-navigation/stack';
+// import SplashScreen from './screen/ScreenSpash';
 import HomeScreen from './screen/ScreenHome';
 import CategoryScreen from './screen/ScreenCategory';
 import CustomDrawerSideMenu from './screen/DrawerSideMenu';
@@ -40,6 +42,7 @@ import PhoneRegistrationScreen from './screen/ScreenPhoneRegistration';
 import SmsVerificationScreen from './screen/ScreenSmsVerification';
 import AsyncStorage from '@react-native-community/async-storage';
 import OrderSummaryScreen from './screen/ScreenOrderSummary';
+import SplashScreen from 'react-native-splash-screen';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -47,6 +50,9 @@ const Tab = createBottomTabNavigator();
 console.disableYellowBox = true;
 
 function RootApp() {
+  useEffect(()=>{
+    SplashScreen.hide();
+  },[]);
   if (isForceRTL) {
     I18nManager.forceRTL(true);
   } else {
@@ -54,6 +60,21 @@ function RootApp() {
   }
   const routeNameRef = React.useRef();
   const navigationRef = React.useRef();
+  const HomeStack = createStackNavigator();
+  function HomeStackScreen() {
+    return (
+      <HomeStack.Navigator>
+        <HomeStack.Screen name={HomeScreenName} component={HomeScreen}/>
+      </HomeStack.Navigator>
+    );
+  }
+  function SettingsStackScreen() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Settings!</Text>
+      </View>
+    );
+  }
   return (
     <NavigationContainer
       ref={navigationRef}
@@ -74,7 +95,7 @@ function RootApp() {
           AsyncStorage.setItem(key_current_route_name, currentRouteName);
         } catch (e) {}
       }}>
-      <Drawer.Navigator
+      {/* <Drawer.Navigator
         screenOptions={{
           headerShown: false,
         }}
@@ -113,7 +134,11 @@ function RootApp() {
           name={OrderSummaryScreenName}
           component={OrderSummaryScreen}
         />
-      </Drawer.Navigator>
+      </Drawer.Navigator> */}
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
