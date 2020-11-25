@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,10 +24,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-
-
 const App: () => React$Node = () => {
-  
   return (
     <>
       <StatusBar barStyle="dark-content" />
