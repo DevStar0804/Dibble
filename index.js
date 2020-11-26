@@ -29,7 +29,7 @@ import {
 } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-// import SplashScreen from './screen/ScreenSpash';
+import SplashScreen from './screen/ScreenSpash';
 import HomeScreen from './screen/ScreenHome';
 import CategoryScreen from './screen/ScreenCategory';
 import CustomDrawerSideMenu from './screen/DrawerSideMenu';
